@@ -7,12 +7,12 @@ import groovy.xml.MarkupBuilder
 import groovy.sql.Sql
 
 def  "Shoot a http request and get print text result"() {
-	println  "http://www.diabol.se".toURL().getText()
+	println  "http://groovy.codehaus.org".toURL().getText()
 }
 
 def "Shoot a http request and save the binary to a file"() {
-	File pdfReport = new File("diabol-logo.jpg")
-	pdfReport.setBytes("http://www.diabol.se/images/diabollogo.jpg".toURL().getBytes())
+	File pdfReport = new File("groovy-logo.png")
+	pdfReport.setBytes("http://groovy.codehaus.org/images/groovy-logo-medium.png".toURL().getBytes())
 }
 
 def "Match a string with regexp and print all tolken occurencies"() {
@@ -26,8 +26,8 @@ def "Execute shell command and print the output"() {
 	println "ls -la".execute().text
 }
 
-def "Expand String class with a cool exapndo meta class method"() {
-	def alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','å','ä','ö']
+def "Expand String class with a cool exapndo meta class method caesarEncrypt"() {
+	def alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 	String.metaClass.caesarEncrypt = {->	
       def sb = new StringBuffer()
       delegate.each {
@@ -35,7 +35,7 @@ def "Expand String class with a cool exapndo meta class method"() {
       }
 	  sb.toString()
 	}
-	println "Hej jag heter Andreas".caesarEncrypt()
+	println "Hi my name is Andreas".caesarEncrypt()
 }
 
 
@@ -61,10 +61,10 @@ def "Iterate trough a list of names and produce xml output"() {
 }
 
 def "Grabs jdbc dependency with grape from custom mvn repos and executes sql query"() {
-	@GrabResolver(name='apotekensservice', root='http://vioxx/nexus/content/groups/utveckling')
+	@GrabResolver(name='local-mvn-repos', root='http://vioxx/nexus/content/groups/utveckling')
 	@GrabConfig(systemClassLoader=true)
 	@Grab('oracle:ojdbc5:11.2.0.3')
-	def query = "SELECT count(*) from RR_EXT0.RECEPT"
+	def query = "select * from user_objects where object_type = 'TABLE'"
 	sql = Sql.newInstance( 'jdbc:oracle:thin:@10.251.100.101:1521:SBXRR', 'CRR_EXT0','CRR_EXT0', 'oracle.jdbc.OracleDriver' )
 	sql.eachRow(query) { println "$it" }
 }
