@@ -6,13 +6,13 @@ import groovy.json.JsonOutput
 import groovy.xml.MarkupBuilder
 import groovy.sql.Sql
 
-def  "Shoot a http request and get print text result"() {
+def  "Shoot a http request and print text result"() {
 	println  "http://groovy.codehaus.org".toURL().getText()
 }
 
 def "Shoot a http request and save the binary to a file"() {
-	File pdfReport = new File("groovy-logo.png")
-	pdfReport.setBytes("http://groovy.codehaus.org/images/groovy-logo-medium.png".toURL().getBytes())
+	File file = new File("groovy-logo.png")
+	file.setBytes("http://groovy.codehaus.org/images/groovy-logo-medium.png".toURL().getBytes())
 }
 
 def "Match a string with regexp and print all tolken occurencies"() {
@@ -26,7 +26,7 @@ def "Execute shell command and print the output"() {
 	println "ls -la".execute().text
 }
 
-def "Expand String class with a cool exapndo meta class method caesarEncrypt"() {
+def "Expand the String class with a exapndo meta class method caesarEncrypt"() {
 	def alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 	String.metaClass.caesarEncrypt = {->	
       def sb = new StringBuffer()
