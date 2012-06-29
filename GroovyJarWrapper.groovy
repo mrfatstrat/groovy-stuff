@@ -1,5 +1,5 @@
 /**
- *  This script is a modification: http://docs.codehaus.org/display/GROOVY/WrappingGroovyScript
+ *  This script is a modification of this script: http://docs.codehaus.org/display/GROOVY/WrappingGroovyScript
  *
  *  Wraps a script together with groovy jars and grapes to an executable jar
  */
